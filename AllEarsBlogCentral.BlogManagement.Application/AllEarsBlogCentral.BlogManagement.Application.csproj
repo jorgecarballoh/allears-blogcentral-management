@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+ 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1"></PackageReference>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0"></PackageReference>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0"></PackageReference>
+    <PackageReference Include="FluentValidation" Version="9.2.2"></PackageReference>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.2.0"></PackageReference>
+    <PackageReference Include="RestSharp" Version="108.0.1" />
+    <Packagereference Include="Microsoft.Extensions.Options.ConfigurationExtensions" version="3.1.10" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Comments\" />
+    <Folder Include="Features\Posts\" />
+    <Folder Include="Features\Users\Queries\GetUsersListWithPosts\" />
+    <Folder Include="Responses\" />
+  </ItemGroup>
+
+</Project>
