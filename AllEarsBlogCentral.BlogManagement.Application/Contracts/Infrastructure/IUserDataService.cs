@@ -12,6 +12,9 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Contracts.Infrastructure
         Task<User> GetByIdAsync(int Id);
         Task<List<User>> GetUsersList();
         Task<User> GetUserWithPosts(int userId);
+        Task<User> GetUserWithAlbumsAndPhotos(int userId);
         Task<User> GetUsersListWithAlbums(int userId);
+
+   
     }
 }

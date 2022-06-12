@@ -13,11 +13,10 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<APISettings>(configuration.GetSection("APISettings"));
-
             services.AddScoped(typeof(IAsyncDataService<>), typeof(BaseDataService<>));
-
             services.AddScoped<IUserDataService, UserDataService>();
-             
+            services.AddScoped<IPostDataService, PostDataService>();
+
             return services;
         }
     }

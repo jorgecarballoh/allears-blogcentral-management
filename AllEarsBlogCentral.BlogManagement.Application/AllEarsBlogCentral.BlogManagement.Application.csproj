@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Comments\" />
-    <Folder Include="Features\Posts\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 

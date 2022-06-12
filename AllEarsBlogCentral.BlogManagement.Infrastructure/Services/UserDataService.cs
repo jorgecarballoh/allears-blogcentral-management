@@ -40,15 +40,15 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
 
         public async Task<User> GetUsersListWithAlbums(int userId)
         {
-            return await CreateAssociationUsersAndAlbumsList(userId);
+            return await CreateAssociationUserAndAlbumsList(userId);
         }
 
         public async Task<User> GetUserWithPosts(int userId)
         {
-            return await CreateAssociationUsersAndPostsList(userId);
+            return await CreateAssociationUserAndPostsList(userId);
         }
 
-        private async Task<User> CreateAssociationUsersAndPostsList(int userId)
+        private async Task<User> CreateAssociationUserAndPostsList(int userId)
         {
             var user = await GetByIdAsync(userId);
 
@@ -61,7 +61,7 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
             return userVm;
         }
 
-        private async Task<User> CreateAssociationUsersAndAlbumsList(int userId)
+        private async Task<User> CreateAssociationUserAndAlbumsList(int userId)
         {
             var user = await GetByIdAsync(userId);
 
@@ -72,6 +72,45 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
             var userVm = _mapper.Map<User>(user);
             userVm.Albums = albumsList;
             return userVm;
+        }
+
+        private async Task<User> CreateAssociationUserWithAlbumsAndPhotosList(int userId)
+        {
+            var user = await GetByIdAsync(userId);
+            var userAlbumsList = await CreateAssociationUserAndAlbumsList(userId);
+            var resultAlbums = await AssingPhotosToAlbums(userAlbumsList);
+
+            var userVm = _mapper.Map<User>(user);
+            userVm.Albums = resultAlbums;
+            return userVm;
+
+        }
+
+        private  async Task<ICollection<Album>> AssingPhotosToAlbums(User userAlbumsList)
+        {
+            Func<int, Task<List<Photo>>> GetPhotosByAlbum = async (int albumId) =>
+             {
+                 var requestAlbumPhotos = new RestRequest($"/albums/{albumId}/photos");
+                 var photosList = await _client.GetAsync<List<Photo>>(requestAlbumPhotos);
+                 return photosList;
+             };
+
+             return await Task.WhenAll(userAlbumsList.Albums.Select(async x => new Album
+             {
+                 Id = x.Id,
+                 Title = x.Title,
+                 UserId = x.UserId,
+                 Photos = await GetPhotosByAlbum(x.Id)
+             }));
+
+
+        }
+
+
+
+        public async Task<User> GetUserWithAlbumsAndPhotos(int userId)
+        {
+            return await CreateAssociationUserWithAlbumsAndPhotosList(userId);
         }
     }
 }

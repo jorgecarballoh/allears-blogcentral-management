@@ -1,6 +1,7 @@
 ﻿using AllEarsBlogCentral.BlogManagement.Application.Features.Users.Queries.GetUsersList;
 using AllEarsBlogCentral.BlogManagement.Application.Features.Users.Queries.GetUsersListWithPosts;
 using AllEarsBlogCentral.BlogManagement.Application.Features.Users.Queries.GetUserWithAlbums;
+using AllEarsBlogCentral.BlogManagement.Application.Features.Users.Queries.GetUserWithAlbumsAndPhotos;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,16 @@ namespace AllEarsBlogCentral.BlogManagement.Api.Controllers
         {
             var getUserWithAlbumsQuery = new GetUserWithAlbumsQuery() { UserId = userId };
             var dtos = await _mediator.Send(getUserWithAlbumsQuery);
+            return Ok(dtos);
+        }
+
+        [HttpGet("allwithalbumsandphotos", Name = "GetUsersWithAlbumsAndPhotos")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<UserAlbumWithPhotoListVm>>> GetUsersWithAlbumsAndPhotos(int userId)
+        {
+            var getUserAlbumsWithPhotosQuery = new GetUserAlbumsWithPhotosQuery() { UserId = userId };
+            var dtos = await _mediator.Send(getUserAlbumsWithPhotosQuery);
             return Ok(dtos);
         }
 
