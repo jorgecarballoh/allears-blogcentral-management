@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AllEarsBlogCentral.BlogManagement.Application.Models
+namespace AllEarsBlogCentral.BlogManagement.Application.Features.Users.Commons
 {
-    public class Address
+    public class AddressDto
     {
         public string Street { get; set; }
         public string Suite { get; set; }
         public string City { get; set; }
-        public string Zipcode { get; set; }
-        public Geo Geo { get; set; }
+        public string ZipCode { get; set; }
+        public GeoDto Geo { get; set; }
     }
 }

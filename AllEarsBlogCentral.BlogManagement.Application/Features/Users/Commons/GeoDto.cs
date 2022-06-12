@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AllEarsBlogCentral.BlogManagement.Application.Models
-{
-    public class Geo
+namespace AllEarsBlogCentral.BlogManagement.Application.Features.Users.Commons
+{ 
+    public class GeoDto
     {
         public string Lat { get; set; }
         public string Lng { get; set; }

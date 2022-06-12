@@ -9,7 +9,9 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Contracts.Infrastructure
 {
     public interface IUserDataService : IAsyncDataService<User>
     {
-        Task<List<User>> GetUsersList();
         Task<User> GetByIdAsync(int Id);
+        Task<List<User>> GetUsersList();
+        Task<User> GetUserWithPosts(int userId);
+        Task<User> GetUsersListWithAlbums(int userId);
     }
 }

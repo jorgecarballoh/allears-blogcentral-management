@@ -23,7 +23,7 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Features.Users.Queries.G
 
         public async Task<List<UserListVm>> Handle(GetUsersListQuery request, CancellationToken cancellationToken)
         {
-            var allUsers = (await _userService.GetUsersList()).OrderBy(x => x.id);
+            var allUsers = (await _userService.GetUsersList()).OrderBy(x => x.Id);
             return _mapper.Map<List<UserListVm>>(allUsers);
         }
     }
