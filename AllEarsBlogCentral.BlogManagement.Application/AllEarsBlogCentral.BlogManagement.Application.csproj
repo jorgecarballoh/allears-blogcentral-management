@@ -13,11 +13,9 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.2.0"></PackageReference>
     <PackageReference Include="RestSharp" Version="108.0.1" />
     <Packagereference Include="Microsoft.Extensions.Options.ConfigurationExtensions" version="3.1.10" />
-
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Comments\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 

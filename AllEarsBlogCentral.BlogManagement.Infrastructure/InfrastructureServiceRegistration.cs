@@ -13,9 +13,9 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<APISettings>(configuration.GetSection("APISettings"));
-            services.AddScoped(typeof(IAsyncDataService<>), typeof(BaseDataService<>));
-            services.AddScoped<IUserDataService, UserDataService>();
-            services.AddScoped<IPostDataService, PostDataService>();
+            services.AddTransient(typeof(IAsyncDataService<>), typeof(BaseDataService<>));
+            services.AddTransient<IUserDataService, UserDataService>();
+            services.AddTransient<IPostDataService, PostDataService>();
 
             return services;
         }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="108.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
   </ItemGroup>
   
   <ItemGroup>
