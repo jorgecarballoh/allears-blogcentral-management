@@ -14,10 +14,34 @@ using System.Threading.Tasks;
 namespace AllEarsBlogCentral.BlogManagement.Api
 {
     public class Program
-    {
+    { 
         public  static void Main(string[] args)
-        {  
-            CreateHostBuilder(args).Build().Run(); 
+        { 
+             
+            try
+            {
+                var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+                Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(config)
+                                                   .MinimumLevel.Information()
+                                                   .CreateLogger();
+
+                Log.Information("Application Starting");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, "An error occured while starting the application");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+
+
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

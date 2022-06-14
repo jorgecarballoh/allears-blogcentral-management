@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Formatting.Compact;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace AllEarsBlogCentral.BlogManagement.Api
 {
@@ -16,11 +17,7 @@ namespace AllEarsBlogCentral.BlogManagement.Api
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
-
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration)
-                                                 .MinimumLevel.Information()
-                                                 .CreateLogger();
+            Configuration = configuration; 
         }
 
         public IConfiguration Configuration { get; }
@@ -52,6 +49,9 @@ namespace AllEarsBlogCentral.BlogManagement.Api
                     Title = "AllEars BlogCentral API",
 
                 });
+                //c.CustomSchemaIds(i => i.FullName);
+                //c.SchemaGeneratorOptions = new SchemaGeneratorOptions { SchemaIdSelector = type => type.FullName };
+
             });
         }
 

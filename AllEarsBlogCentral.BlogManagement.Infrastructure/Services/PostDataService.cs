@@ -3,6 +3,7 @@ using AllEarsBlogCentral.BlogManagement.Application.Models;
 using AllEarsBlogCentral.BlogManagement.Application.Models.API;
 using AllEarsBlogCentral.BlogManagement.Infrastructure.Services.Base;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RestSharp;
 using System;
@@ -16,17 +17,21 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
     public class PostDataService : BaseDataService<Post>, IPostDataService
     {
         private readonly IMapper _mapper;
-        public PostDataService(IOptions<APISettings> apiSettings, IMapper mapper) : base(apiSettings)
+        private readonly ILogger<PostDataService> _logger;
+        public PostDataService(IOptions<APISettings> apiSettings, IMapper mapper, ILogger<PostDataService> logger) : base(apiSettings)
         {
             _mapper = mapper;
+            _logger = logger;
         }
-        
+
         public async Task<List<Post>> GetPostsList()
         {
+            _logger.LogInformation("Starting request for getting the list of posts");
             var requestPost = new RestRequest("posts");
             requestPost.Timeout = _apiSettings.TimeOut;
-            var result = await _client.GetAsync<List<Post>>(requestPost);
-            return result;
+            var postsList = await _client.GetAsync<List<Post>>(requestPost);
+            _logger.LogInformation("Processed the list of users: {@PostsList}", postsList);
+            return postsList;
         } 
     }
 }

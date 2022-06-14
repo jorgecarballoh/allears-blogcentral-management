@@ -1,4 +1,5 @@
-﻿using AllEarsBlogCentral.BlogManagement.Application.Contracts.Infrastructure;
+﻿using AllEarsBlogCentral.BlogManagement.Application.Contracts;
+using AllEarsBlogCentral.BlogManagement.Application.Contracts.Infrastructure;
 using AllEarsBlogCentral.BlogManagement.Application.Models.API;
 using AllEarsBlogCentral.BlogManagement.Infrastructure.Services;
 using AllEarsBlogCentral.BlogManagement.Infrastructure.Services.Base;
@@ -16,6 +17,7 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure
             services.AddTransient(typeof(IAsyncDataService<>), typeof(BaseDataService<>));
             services.AddTransient<IUserDataService, UserDataService>();
             services.AddTransient<IPostDataService, PostDataService>();
+            services.AddTransient<ILogUserDataService, LogUserDataService>();
 
             return services;
         }

@@ -121,8 +121,6 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
 
         }
 
-
-
         public async Task<User> GetUserWithAlbumsAndPhotos(int userId)
         {
             return await CreateAssociationUserWithAlbumsAndPhotosList(userId);

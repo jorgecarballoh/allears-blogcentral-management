@@ -11,12 +11,16 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0"></PackageReference>
     <PackageReference Include="FluentValidation" Version="9.2.2"></PackageReference>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.2.0"></PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.1" />
     <Packagereference Include="Microsoft.Extensions.Options.ConfigurationExtensions" version="3.1.10" />
   </ItemGroup>
 
+ 
   <ItemGroup>
-    <Folder Include="Responses\" />
+    <Folder Include="Features\UserLogs\Queries\GetLogsOfUsersList\" />
+    <Folder Include="Features\UserLogs\Queries\GetLogsOfUserPostList\" />
   </ItemGroup>
 
 </Project>
