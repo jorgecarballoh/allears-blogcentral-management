@@ -1,21 +1,22 @@
 ﻿using AllEarsBlogCentral.BlogManagement.App.Contracts;
-using AllEarsBlogCentral.BlogManagement.App.Services.Base;
 using AllEarsBlogCentral.BlogManagement.App.ViewModels;
 using AutoMapper;
 using Blazored.LocalStorage;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AllEarsBlogCentral.BlogManagement.App.Services
 {
-    public class UserDataService : BaseDataService, IUserDataService
+    public class UserDataService : IUserDataService
     {
-        private readonly IMapper _mapper;
+        private readonly HttpClient _client;
 
-        public UserDataService(ILocalStorageService localStorage, IClient client, IMapper mapper) : base(localStorage, client)
+        public UserDataService(IMapper mapper, HttpClient client)
         {
-            _mapper = mapper;
+            _client = client;
         }
 
         public Task<UserViewModel> GetByIdAsync(int Id)
@@ -24,32 +25,23 @@ namespace AllEarsBlogCentral.BlogManagement.App.Services
         }
 
         public async Task<List<UserViewModel>> GetUsersList()
-        {
-            var allUsers = await _client.GetAllUsersAsync();
-            var mappedUsers = _mapper.Map<ICollection<UserViewModel>>(allUsers);
-            return mappedUsers.ToList();
-
+        { 
+            return await _client.GetFromJsonAsync<List<UserViewModel>>("api/user/all");  
         }
 
         public async Task<List<UserAlbumViewModel>> GetUsersListWithAlbums(int userId)
         {
-            var allAlbumsUser = await _client.GetUsersWithAlbumsAsync(userId);
-            var mappedAlbumsUser = _mapper.Map<ICollection<UserAlbumViewModel>>(allAlbumsUser);
-            return mappedAlbumsUser.ToList();
+           return  await _client.GetFromJsonAsync<List<UserAlbumViewModel>>($"/api/user/allwithalbums?userId={userId}");
         }
 
         public async Task<List<UserAlbumWithPhotoViewModel>> GetUserWithAlbumsAndPhotos(int userId)
         {
-            var allAlbumsAndPhotosUser = await _client.GetUsersWithAlbumsAndPhotosAsync(userId);
-            var mappedAlbumsAndPhotosUser = _mapper.Map<ICollection<UserAlbumWithPhotoViewModel>>(allAlbumsAndPhotosUser);
-            return mappedAlbumsAndPhotosUser.ToList();
+           return await _client.GetFromJsonAsync<List<UserAlbumWithPhotoViewModel>>($"/api/user/allwithalbumsandphotos?userId={userId}");  
         }
 
         public async Task<List<UserPostViewModel>> GetUserWithPosts(int userId)
         {
-            var allPostsUser = await _client.GetUsersWithPostsAsync(userId);
-            var mappedPostsUser = _mapper.Map<ICollection<UserPostViewModel>>(allPostsUser);
-            return mappedPostsUser.ToList();
+            return await _client.GetFromJsonAsync<List<UserPostViewModel>>($"/api/User/allwithposts?userId={userId}");
         }
     }
 }

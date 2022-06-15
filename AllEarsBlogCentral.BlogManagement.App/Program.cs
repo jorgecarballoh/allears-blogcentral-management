@@ -23,8 +23,8 @@ namespace AllEarsBlogCentral.BlogManagement.App
             builder.RootComponents.Add<App>("#app");
 
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            builder.Services.AddAutoMapper(assemblies);
             builder.Services.AddBlazoredLocalStorage();
              
             builder.Services.AddSingleton(new HttpClient
@@ -32,12 +32,14 @@ namespace AllEarsBlogCentral.BlogManagement.App
                 BaseAddress = new Uri("https://localhost:5001")
             });
 
-            builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:5001"));
+            builder.Services.AddHttpClient<IUserDataService, UserDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
+            builder.Services.AddHttpClient<IPostDataService, PostDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
 
-            builder.Services.AddScoped<IUserDataService, UserDataService>();
-            builder.Services.AddScoped<IPostDataService, PostDataService>();
+            //builder.Services.AddScoped<IUserDataService, UserDataService>();
+            //builder.Services.AddScoped<IPostDataService, PostDataService>();
+
             //builder.Services.AddScoped<ILogDataService, LogDataService>();
-       
+
 
 
             await builder.Build().RunAsync();

@@ -1,19 +1,20 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
 {
-    public partial class PostViewModel
+    public class AlbumViewModel
     {
+        [JsonProperty("userId")]
+        public long UserId { get; set; }
+
         [JsonProperty("id")]
         public long Id { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonProperty("body")]
-        public string Body { get; set; }
-
-        [JsonProperty("userId")]
-        public long UserId { get; set; }
+        [JsonProperty("photos")]
+        public List<PhotoViewModel> Photos { get; set; }
     }
 }

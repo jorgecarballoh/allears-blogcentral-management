@@ -1,0 +1,32 @@
+﻿@page "/users"
+
+
+
+@if (Users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+ <table class="table table-hover" id="task-table">
+<thead>
+							<tr>
+								<th>#</th>
+								<th>Nombres</th>
+								<th>Usuario</th>
+								<th>Telefono</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var user in Users)
+						   {
+							   <tr>
+								<td>@user.Id</td>
+								<td>@user.Name</td>
+								<td>@user.Username</td>
+								<td>@user.Phone</td>
+							</tr>
+						   }
+						</tbody>						
+</table>
+}

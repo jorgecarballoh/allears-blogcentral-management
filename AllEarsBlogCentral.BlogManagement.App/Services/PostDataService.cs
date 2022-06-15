@@ -1,21 +1,27 @@
 ﻿using AllEarsBlogCentral.BlogManagement.App.Contracts;
-using AllEarsBlogCentral.BlogManagement.App.Services.Base;
 using AllEarsBlogCentral.BlogManagement.App.ViewModels;
+using AutoMapper;
 using Blazored.LocalStorage;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AllEarsBlogCentral.BlogManagement.App.Services
 {
-    public class PostDataService : BaseDataService, IPostDataService
+    public class PostDataService : IPostDataService
     {
-        public PostDataService(ILocalStorageService localStorage, IClient client) : base(localStorage, client)
+        private readonly HttpClient _httpClient;
+
+        public PostDataService(HttpClient httpClient)
         {
+            _httpClient = httpClient;
         }
 
-        public Task<List<PostViewModel>> GetPostsList()
+        public async Task<List<PostViewModel>> GetPostsList()
         {
-            throw new System.NotImplementedException();
+            return await _httpClient.GetFromJsonAsync<List<PostViewModel>>("api/post/all");
         }
     }
 }
