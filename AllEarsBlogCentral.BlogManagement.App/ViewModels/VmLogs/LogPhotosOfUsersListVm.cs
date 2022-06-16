@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
+namespace AllEarsBlogCentral.BlogManagement.App.ViewModels.VmLogs
 {
-    public partial class UserAlbumWithPhotoViewModel
+        public partial class LogPhotosOfUsersListVm
         {
             [JsonProperty("id")]
             public long Id { get; set; }
@@ -34,10 +34,4 @@ namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
             [JsonProperty("albums")]
             public List<AlbumViewModel> Albums { get; set; }
         }
-     
-        
-
-       
-    }
-
-
+}

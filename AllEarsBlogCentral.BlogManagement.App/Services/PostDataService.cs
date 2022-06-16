@@ -1,5 +1,5 @@
 ﻿using AllEarsBlogCentral.BlogManagement.App.Contracts;
-using AllEarsBlogCentral.BlogManagement.App.ViewModels;
+using AllEarsBlogCentral.BlogManagement.App.ViewModels.VmCommons;
 using AutoMapper;
 using Blazored.LocalStorage;
 using System.Collections.Generic;

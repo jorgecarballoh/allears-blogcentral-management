@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using AllEarsBlogCentral.BlogManagement.App.ViewModels.VmCommons;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
 {
-  
-        public partial class UserAlbumViewModel
+
+    public partial class UserAlbumViewModel
         {
             [JsonProperty("id")]
             public long Id { get; set; }

@@ -1,4 +1,4 @@
-﻿using AllEarsBlogCentral.BlogManagement.App.ViewModels;
+﻿using AllEarsBlogCentral.BlogManagement.App.ViewModels.VmCommons;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

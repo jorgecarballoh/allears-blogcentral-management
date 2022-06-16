@@ -22,24 +22,13 @@ namespace AllEarsBlogCentral.BlogManagement.App
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             builder.Services.AddAutoMapper(assemblies);
             builder.Services.AddBlazoredLocalStorage();
              
-            builder.Services.AddSingleton(new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:5001")
-            });
-
-            builder.Services.AddHttpClient<IUserDataService, UserDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
-            builder.Services.AddHttpClient<IPostDataService, PostDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
-
-      
-
-            //builder.Services.AddScoped<ILogDataService, LogDataService>();
-
-
+            builder.Services.AddHttpClient<IUserDataService,UserDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
+            builder.Services.AddHttpClient<IPostDataService,PostDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
+            builder.Services.AddHttpClient<ILogDataService,LogDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
 
             await builder.Build().RunAsync();
         }

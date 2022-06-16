@@ -11,7 +11,6 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Features.UserLogs.Querie
 {
     public partial class Address
     {
-        public string _typeTag { get; set; }
         public string Street { get; set; }
         public string Suite { get; set; }
         public string City { get; set; }
@@ -21,7 +20,6 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Features.UserLogs.Querie
 
     public partial class Company
     {
-        public string _typeTag { get; set; }
         public string Name { get; set; }
         public string CatchPhrase { get; set; }
         public string Bs { get; set; }
@@ -29,7 +27,6 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Features.UserLogs.Querie
 
     public partial class Geo
     {
-        public string _typeTag { get; set; }
         public string Lat { get; set; }
         public string Lng { get; set; }
     }

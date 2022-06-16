@@ -1,9 +1,10 @@
 ﻿
+using AllEarsBlogCentral.BlogManagement.App.ViewModels.VmCommons;
 using Newtonsoft.Json;
 
 namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
 {
-        public partial class UserViewModel
+    public partial class UserViewModel
         {
             [JsonProperty("id")]
             public long Id { get; set; }

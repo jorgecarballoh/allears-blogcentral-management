@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using AllEarsBlogCentral.BlogManagement.App.ViewModels.VmCommons;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
 {
-    
-        public partial class UserPostViewModel
+
+    public partial class UserPostViewModel
         {
             [JsonProperty("id")]
             public long Id { get; set; }
@@ -31,22 +32,7 @@ namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
             public CompanyViewModel Company { get; set; }
 
             [JsonProperty("posts")]
-            public List<Post> Posts { get; set; }
-        }
-     
-        public partial class Post
-        {
-            [JsonProperty("id")]
-            public long Id { get; set; }
-
-            [JsonProperty("title")]
-            public string Title { get; set; }
-
-            [JsonProperty("body")]
-            public string Body { get; set; }
-
-            [JsonProperty("userId")]
-            public long UserId { get; set; }
+            public List<PostViewModel> Posts { get; set; }
         }
     }
 

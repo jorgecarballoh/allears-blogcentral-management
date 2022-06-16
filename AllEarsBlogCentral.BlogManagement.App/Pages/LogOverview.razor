@@ -1,1 +1,73 @@
-﻿
+﻿@page "/logs"
+@using Newtonsoft.Json
+
+
+      <div class="card">
+        
+        <div class="card-header">
+            
+             <h3 style="color:#2C3E50">Bitacora de peticiones</h3>
+                
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Escoga el reporte</label>
+                  </div>
+                  <select class="custom-select" id="typeReport" @bind="OptionSelected">
+                     <option value="" selected>Seleccione</option>
+                     <option value="1">Usuarios</option>
+                     <option value="2">Publicaciones</option>
+                     <option value="3">Fotos</option> 
+                     <option  value="4">Albumes</option>
+                  </select>
+                </div>
+
+
+                 <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01"><span class="oi oi-calendar"></span></label>
+                  </div>
+                    <input type="date" id="dateSeachr" class="form-control" placeholder="Fecha" @bind="DateConsulted" />
+                </div>
+                  
+                 <br/>
+                 <br/>
+
+                <button type="button" class="btn btn-primary pull-rigth" @onclick="OnConsulReport">
+                    <i class="oi oi-browser"></i> Consultar
+                </button> 
+            </div>                 
+        <div class="card-body">    
+ 
+             @if(Users == null)
+             {
+                 <p><em>Cargando peticiones...</em></p>
+             }
+             else
+             {
+               <table class="table table-dark">
+                  <thead>
+                  <tr>
+                      <th class="text-center" width="115px">Fecha</th>
+                      <th class="text-center" width="115px">Nivel</th>
+                      <th class="text-center" width="115px">Consultado</th>
+                      <th class="text-center" width="115px">Datos</th>
+                      <th class="text-center" width="115px">Solicitud</th>
+                  </tr>
+              </thead>   
+              <tbody>
+                @foreach (var user in Users)
+               {
+                    <tr>
+                        <td class="text-center" width="150px">@user.Timestamp</td>
+                        <td class="text-center" width="150px">@user.Level</td>
+                        <td class="text-center" width="150px">@user.MessageTemplate.ToString()</td>
+                        <td class="text-center" width="150px">@JsonConvert.SerializeObject(user.Properties.UsersList)</td>
+                        <td class="text-center" width="150px">@user.Properties.RequestId</td>
+                   </tr>
+               }
+              </tbody>
+             </table>
+             }
+
+    </div>
+  </div>

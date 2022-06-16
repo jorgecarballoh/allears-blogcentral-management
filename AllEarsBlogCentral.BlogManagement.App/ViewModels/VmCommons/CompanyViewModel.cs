@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AllEarsBlogCentral.BlogManagement.App.ViewModels
+namespace AllEarsBlogCentral.BlogManagement.App.ViewModels.VmCommons
 {
     public class CompanyViewModel
     {
