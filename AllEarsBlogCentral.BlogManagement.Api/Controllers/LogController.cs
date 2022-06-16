@@ -31,7 +31,7 @@ namespace AllEarsBlogCentral.BlogManagement.Api.Controllers
             return Ok(dtos);
         }
 
-        [HttpGet("postlist", Name = "GetLogsOfPostsUser")]
+        [HttpGet("postslist", Name = "GetLogsOfPostsUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<LogPostsOfUserListVm>>> GetLogsOfPostsUser(DateTime date)
         {
@@ -40,7 +40,7 @@ namespace AllEarsBlogCentral.BlogManagement.Api.Controllers
             return Ok(dtos);
         }
 
-        [HttpGet("albumlist", Name = "GetLogsOfAlbumsUser")]
+        [HttpGet("albumslist", Name = "GetLogsOfAlbumsUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<LogAlbumsOfUserListVm>>> GetLogsOfAlbumsUser(DateTime date)
         {

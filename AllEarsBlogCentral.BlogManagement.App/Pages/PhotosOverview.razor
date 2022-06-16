@@ -13,7 +13,7 @@ else
        <button class="btn btn-outline-primary" type="button">Buscar</button>
      </div>
      <select class="custom-select" id="onListUsersSelected" aria-label="Example select with button addon" @onchange="OnListUsersSelected">
-       <option selected>Seleccione</option> @foreach (var user in Users) { <option value="@user.Id">@user.Username | @user.Name</option> }
+       <option value="">Seleccione</option> @foreach (var user in Users) { <option value="@user.Id">@user.Username | @user.Name</option> }
      </select>
    </div>
  </div> 

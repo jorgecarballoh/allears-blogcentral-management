@@ -23,24 +23,31 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
         {
             var dataReadFromLog = await ReadAllLineFromLogsFileByDate(date.ToString("yyyyMMdd"));
 
-            var listOfUsersInFileLogs =  dataReadFromLog.Select(x => JsonConvert.DeserializeObject<LogUsersListVm>(x))
-                                        .Where(y => y.Level.Equals("Information") && y.MessageTemplate
+            var dataArrayString = dataReadFromLog.Select(x => TryParseToGeneric<LogUsersListVm>(x))
+                                        .Where(y => y!=null && y.Level.Equals("Information") && y.MessageTemplate
                                         .Contains("Processed the list of users: {@UsersList}"))
                                         .ToList();
-
-            return listOfUsersInFileLogs;
-
-             
+            return  dataArrayString;
         }
 
-
+        private static T TryParseToGeneric<T>(string x)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(x);
+            }
+            catch (Exception)
+            {
+                return default(T);
+            }
+        }
 
         public async Task<List<LogPostsOfUserListVm>> GetLogPostsUserByDate(DateTime date)
         {
             var dataReadFromLog = await ReadAllLineFromLogsFileByDate(date.ToString("yyyyMMdd"));
 
-            var listPostsOfUserInFileLogs = dataReadFromLog.Select(x => JsonConvert.DeserializeObject<LogPostsOfUserListVm>(x))
-                                                       .Where(y => y.Level.Equals("Information") && y.MessageTemplate
+            var listPostsOfUserInFileLogs = dataReadFromLog.Select(x => TryParseToGeneric<LogPostsOfUserListVm>(x))
+                                                       .Where(y => y!=null && y.Level.Equals("Information") && y.MessageTemplate
                                                        .Contains("Processed the list of posts from user: {@PostsList}"))
                                                        .ToList();
 
@@ -51,8 +58,8 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
         {
             var dataReadFromLog = await ReadAllLineFromLogsFileByDate(date.ToString("yyyyMMdd"));
 
-            var listPostsOfUserInFileLogs = dataReadFromLog.Select(x => JsonConvert.DeserializeObject<LogAlbumsOfUserListVm>(x))
-                                                       .Where(y => y.Level.Equals("Information") && y.MessageTemplate
+            var listPostsOfUserInFileLogs = dataReadFromLog.Select(x => TryParseToGeneric<LogAlbumsOfUserListVm>(x))
+                                                       .Where(y => y!=null && y.Level.Equals("Information") && y.MessageTemplate
                                                        .Contains("Processed request for getting the list of albums: {@AlbumsList}"))
                                                        .ToList();
 
@@ -63,8 +70,8 @@ namespace AllEarsBlogCentral.BlogManagement.Infrastructure.Services
         {
             var dataReadFromLog = await ReadAllLineFromLogsFileByDate(date.ToString("yyyyMMdd"));
 
-            var listPostsOfUserInFileLogs = dataReadFromLog.Select(x => JsonConvert.DeserializeObject<LogPhotosOfUsersListVm>(x))
-                                                       .Where(y => y.Level.Equals("Information") && y.MessageTemplate
+            var listPostsOfUserInFileLogs = dataReadFromLog.Select(x => TryParseToGeneric<LogPhotosOfUsersListVm>(x))
+                                                       .Where(y => y!=null && y.Level.Equals("Information") && y.MessageTemplate
                                                        .Contains("Processed the list of photos from albums: {@PhotosList}"))
                                                        .ToList();
 

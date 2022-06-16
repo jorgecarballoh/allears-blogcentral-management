@@ -35,13 +35,21 @@ namespace AllEarsBlogCentral.BlogManagement.App.Pages
         {
             switch (option)
             {
-                case 1: Users = await LogDataService.GetLogUsersByDate(dateSearch);
+                case 1:
+                    var usersList = await LogDataService.GetLogUsersByDate(dateSearch);
+                    if (usersList.Count > 0) Users = usersList;
                     break;
-                case 2: Posts = await LogDataService.GetLogPostsUserByDate(dateSearch);
+                case 2:
+                    var postsList = await LogDataService.GetLogPostsUserByDate(dateSearch);
+                    if (postsList.Count > 0) Posts = postsList;
                     break;
-                case 3: Photos = await LogDataService.GetLogPhotosUserByDate(dateSearch);
+                case 3:
+                    var photosList = await LogDataService.GetLogPhotosUserByDate(dateSearch);
+                    if (photosList.Count > 0) Photos = photosList;
                     break;
-                case 4: Albums = await LogDataService.GetLogAlbumsUserByDate(dateSearch);
+                case 4: 
+                    var albumsList = await LogDataService.GetLogAlbumsUserByDate(dateSearch);
+                    if (albumsList.Count > 0) Albums = albumsList;
                     break;
                 default:
                     break;

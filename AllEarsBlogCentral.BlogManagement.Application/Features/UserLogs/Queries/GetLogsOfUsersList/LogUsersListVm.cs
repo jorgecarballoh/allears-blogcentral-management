@@ -35,6 +35,7 @@ namespace AllEarsBlogCentral.BlogManagement.Application.Features.UserLogs.Querie
 
     public partial class LogUsersListVm
     {
+        
         public DateTime Timestamp { get; set; }
         public string Level { get; set; }
         public string MessageTemplate { get; set; }
