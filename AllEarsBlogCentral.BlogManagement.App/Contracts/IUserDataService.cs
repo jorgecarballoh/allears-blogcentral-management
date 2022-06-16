@@ -6,10 +6,9 @@ namespace AllEarsBlogCentral.BlogManagement.App.Contracts
 {
     public interface IUserDataService
     {
-        Task<UserViewModel> GetByIdAsync(int Id);
         Task<List<UserViewModel>> GetUsersList();
-        Task<List<UserPostViewModel>> GetUserWithPosts(int userId);
-        Task<List<UserAlbumWithPhotoViewModel>> GetUserWithAlbumsAndPhotos(int userId);
-        Task<List<UserAlbumViewModel>> GetUsersListWithAlbums(int userId);
+        Task<UserPostViewModel> GetUserWithPosts(int userId);
+        Task<List<List<PhotoViewModel>>> GetPhotosOfUser(int userId);
+        Task<UserAlbumViewModel> GetUsersListWithAlbums(int userId);
     }
 }

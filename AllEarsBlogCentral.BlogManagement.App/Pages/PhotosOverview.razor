@@ -1,0 +1,91 @@
+﻿@page "/photosoverview"
+
+@if (Users == null) 
+{ <p>
+   <em>Cargando informacion...</em>
+ </p> 
+} 
+else 
+{ 
+  <div class="container-fluid">
+   <div class="input-group mb-3">
+     <div class="input-group-prepend">
+       <button class="btn btn-outline-primary" type="button">Buscar</button>
+     </div>
+     <select class="custom-select" id="onListUsersSelected" aria-label="Example select with button addon" @onchange="OnListUsersSelected">
+       <option selected>Seleccione</option> @foreach (var user in Users) { <option value="@user.Id">@user.Username | @user.Name</option> }
+     </select>
+   </div>
+ </div> 
+
+
+
+    @if (Photos == null)
+    {
+        <p><em>Favor seleccione un usuario para visualizar sus fotos...</em></p>
+    }
+    else
+    {
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            
+            @foreach (var photoList in Photos) 
+            {
+                    @foreach (var photo in photoList)
+                    {
+                        @if (CounterPagination==0)
+                        {
+                             <li data-target="#carouselExampleIndicators" data-slide-to="@CounterPagination" class="active"></li>
+                        }
+                          <li data-target="#carouselExampleIndicators" data-slide-to="@CounterPagination"></li>
+                        CounterPagination++;
+                    }
+            }
+          </ol>
+          <div class="carousel-inner">
+             @foreach (var photoList in Photos) { 
+                    @foreach (var photo in photoList) {
+                        @if (CounterSlider==0)
+                        {
+                           <div class="carousel-item active">
+                                <img src="@photo.Url.ToString()" class="d-block w-100" alt="40">
+                                <div class="carousel-caption d-none d-md-block">
+                                  <h5>Foto de Album codigo: @photo.AlbumId</h5>
+                                  <p>@photo.Title</p>
+                                </div>
+
+                            </div>  
+                        }
+                        <div class="carousel-item active">
+                                <img src="@photo.Url.ToString()" class="d-block w-100" alt="40">
+                                <div class="carousel-caption d-none d-md-block">
+                                  <h5>Foto de Album codigo: @photo.AlbumId</h5>
+                                  <p>@photo.Title</p>
+                                </div>
+                        </div>
+                        CounterSlider++;
+                    } 
+             }
+          </div>
+          <a class="carousel-control-prev"  role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next"  role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+     
+    }
+}
+   
+
+
+
+
+
+
+ 
+

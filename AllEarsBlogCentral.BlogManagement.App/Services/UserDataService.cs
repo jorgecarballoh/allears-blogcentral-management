@@ -2,6 +2,7 @@
 using AllEarsBlogCentral.BlogManagement.App.ViewModels;
 using AutoMapper;
 using Blazored.LocalStorage;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -19,29 +20,28 @@ namespace AllEarsBlogCentral.BlogManagement.App.Services
             _client = client;
         }
 
-        public Task<UserViewModel> GetByIdAsync(int Id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<List<UserViewModel>> GetUsersList()
         { 
             return await _client.GetFromJsonAsync<List<UserViewModel>>("api/user/all");  
         }
 
-        public async Task<List<UserAlbumViewModel>> GetUsersListWithAlbums(int userId)
+        public async Task<UserAlbumViewModel> GetUsersListWithAlbums(int userId)
         {
-           return  await _client.GetFromJsonAsync<List<UserAlbumViewModel>>($"/api/user/allwithalbums?userId={userId}");
+           return  await _client.GetFromJsonAsync<UserAlbumViewModel>($"/api/user/allwithalbums?userId={userId}");
         }
 
-        public async Task<List<UserAlbumWithPhotoViewModel>> GetUserWithAlbumsAndPhotos(int userId)
+        public async Task<List<List<PhotoViewModel>>> GetPhotosOfUser(int userId)
         {
-           return await _client.GetFromJsonAsync<List<UserAlbumWithPhotoViewModel>>($"/api/user/allwithalbumsandphotos?userId={userId}");  
+            
+            var response =  await _client.GetFromJsonAsync<UserAlbumWithPhotoViewModel>($"/api/user/allwithalbumsandphotos?userId={userId}");
+            return response.Albums.Select(x => x.Photos).Take(1).ToList().Take(1).ToList();
+ 
         }
 
-        public async Task<List<UserPostViewModel>> GetUserWithPosts(int userId)
+        public async Task<UserPostViewModel> GetUserWithPosts(int userId)
         {
-            return await _client.GetFromJsonAsync<List<UserPostViewModel>>($"/api/User/allwithposts?userId={userId}");
+            return await _client.GetFromJsonAsync<UserPostViewModel>($"/api/User/allwithposts?userId={userId}");
         }
     }
+
 }

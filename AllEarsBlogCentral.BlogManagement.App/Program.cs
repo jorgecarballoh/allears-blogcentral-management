@@ -35,8 +35,7 @@ namespace AllEarsBlogCentral.BlogManagement.App
             builder.Services.AddHttpClient<IUserDataService, UserDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
             builder.Services.AddHttpClient<IPostDataService, PostDataService>(client => client.BaseAddress = new Uri("https://localhost:44323/"));
 
-            //builder.Services.AddScoped<IUserDataService, UserDataService>();
-            //builder.Services.AddScoped<IPostDataService, PostDataService>();
+      
 
             //builder.Services.AddScoped<ILogDataService, LogDataService>();
 

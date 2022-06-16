@@ -1,6 +1,24 @@
 ﻿@page "/posts"
-<h3>PostOverview</h3>
 
-@code {
-
+@if(Posts==null)
+{
+    <p><em>Cargando informacion...</em></p>
+}else
+{
+ <table class="table table-dark">
+   <thead>
+     <tr>
+       <th>#</th>
+       <th>Titulo</th>
+       <th>Contenido</th>
+       <th>Usuario</th>
+     </tr>
+   </thead>
+   <tbody> @foreach (var post in Posts) { <tr>
+       <td>@post.Id</td>
+       <td>@post.Title</td>
+       <td>@post.Body</td>
+       <td>@post.UserId</td>
+     </tr> } </tbody>
+ </table>
 }
