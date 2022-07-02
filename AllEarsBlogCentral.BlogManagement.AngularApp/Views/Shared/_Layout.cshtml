@@ -3,8 +3,19 @@
   <head>
     <title>@ViewBag.Title</title>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+
+    <environment include="Development">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/fortawesome/fontawesome-free/css/all.css" rel="stylesheet" />
+         <link href="~/css/site.css" rel="stylesheet" />
+    </environment>
+
+    <environment exclude="Development">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/lib/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+        <link href="~/dist/allears.min.css" asp-append-version="true"/>
+    </environment>
+
     @RenderSection("head",false)
   </head>
   <body>
@@ -56,8 +67,16 @@
                     </small>
                   </div>
                 </footer>
-                <script src="~/lib/jquery/dist/jquery.js"></script>
-                <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+                <environment include="Development">
+                    <script src="~/lib/jquery/dist/jquery.js"></script>
+                    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+                </environment>
+
+                <environment exclude="Development">
+                    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+                    <script src="~/dist/allears.min.js" asp-append-version="true"></script>
+                </environment>
 
                 @RenderSection("scripts",false)
          </div>
